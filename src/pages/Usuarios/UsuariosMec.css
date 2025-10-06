@@ -1,0 +1,453 @@
+/* Container principal da página */
+.admin-container {
+    background-color: #f7f7f7; /* Fundo cinza claro */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif; 
+    width: 100%;
+}
+
+/* --- HEADER (LARGURA TOTAL) --- */
+.admin-header-full {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Usa padding lateral para que o conteúdo fique visível e esticado nas bordas */
+    padding: 15px 40px; 
+    width: 100%;
+    box-sizing: border-box;
+    /* Garante que o conteúdo centralizado na tela fique alinhado (se houver um max-width, remova o 40px) */
+    max-width: 100%; 
+    margin: 0 auto; 
+}
+
+.admin-header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-header-left img {
+    height: 35px; 
+}
+
+.admin-header-left h1 {
+    font-size: 18px; 
+    font-weight: 500;
+    margin: 0;
+    color: #333;
+}
+
+.admin-header-left span {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+}
+
+.admin-header-right {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilos dos Botões de Navegação (IDÊNTICOS AO ADMIN.JS) */
+.admin-header-right button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    background: #fff;
+    transition: all 0.2s;
+}
+
+/* Botão ATIVO (Usuários neste caso) - Cinza */
+.admin-header-right .btn-usuarios.active {
+    background-color: #9e9e9e;
+    color: #fff;
+    border-color: #9e9e9e;
+}
+
+/* Botões INATIVOS (Manifestações e Sair) - Branco */
+.admin-header-right .btn-manifestacoes,
+.admin-header-right .btn-sair {
+    background-color: #fff;
+    color: #444;
+    border-color: #ccc;
+}
+.admin-header-right .btn-manifestacoes:hover,
+.admin-header-right .btn-sair:hover {
+    background-color: #f0f0f0;
+}
+
+/* --- LINHA DIVISÓRIA VERMELHA (LARGURA TOTAL) --- */
+.linha-vermelha {
+    width: 100%; 
+    height: 2px;
+    background-color: #b60000; 
+    margin-bottom: 30px; /* Espaçamento após a linha */
+}
+
+
+/* --- CONTEÚDO PRINCIPAL (CENTRALIZADO) --- */
+.admin-main-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 40px; /* Padding para alinhar com o padding do Header */
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1100px; /* Largura máxima para centralizar o conteúdo da tabela */
+    margin: 0 auto; /* Centraliza o bloco da tabela */
+}
+
+.usuarios-table-card {
+    background-color: #fff;
+    border-radius: 4px; 
+    padding: 25px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Título e Subtítulo */
+.usuarios-header-content-inner {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee; 
+}
+
+.usuarios-header-content-inner h3 {
+    font-size: 22px;
+    font-weight: 500; 
+    color: #2b2b2b;
+    margin: 0;
+}
+
+.usuarios-header-content-inner p {
+    font-size: 13px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Filtros */
+.usuarios-filter-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.filter-label {
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+}
+
+.usuarios-filter-buttons .btn-filter {
+    padding: 5px 12px; 
+    border-radius: 0; 
+    border: 1px solid #ccc; 
+    background-color: #fff;
+    color: #444;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.usuarios-filter-buttons .active-filter {
+    background-color: #c20000; 
+    color: #fff;
+    border-color: #c20000;
+}
+
+/* Tabela */
+.table-wrapper {
+    overflow-x: auto; 
+}
+
+.table-users {
+    width: 100%; 
+    border-collapse: collapse;
+}
+
+.table-users thead th {
+    text-align: left;
+    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #444;
+    background: #f8f8f8; 
+    border-bottom: 1px solid #ddd;
+}
+
+.table-users tbody td {
+    padding: 10px 18px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+/* Ações na Tabela */
+.table-actions {
+    white-space: nowrap;
+}
+
+.table-actions .btn-gerenciar {
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.table-actions .btn-excluir {
+    background-color: #c20000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* --- FOOTER (Ajustado para 100% de largura) --- */
+.footer-wrapper {
+    width: 100%;
+    margin-top: auto; /* Empurra o footer para baixo */
+}
+
+/* Certifique-se que o componente Footer em si tenha a cor de fundo cinza, como em image_c7c6ed.png *//* Container principal da página */
+.admin-container {
+    background-color: #f7f7f7; /* Fundo cinza claro */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif; 
+    width: 100%;
+}
+
+/* --- HEADER (LARGURA TOTAL) --- */
+.admin-header-full {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Usa padding lateral para que o conteúdo fique visível e esticado nas bordas */
+    padding: 15px 40px; 
+    width: 100%;
+    box-sizing: border-box;
+    /* Garante que o conteúdo centralizado na tela fique alinhado (se houver um max-width, remova o 40px) */
+    max-width: 100%; 
+    margin: 0 auto; 
+}
+
+.admin-header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-header-left img {
+    height: 35px; 
+}
+
+.admin-header-left h1 {
+    font-size: 18px; 
+    font-weight: 500;
+    margin: 0;
+    color: #333;
+}
+
+.admin-header-left span {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+}
+
+.admin-header-right {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilos dos Botões de Navegação (IDÊNTICOS AO ADMIN.JS) */
+.admin-header-right button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    background: #fff;
+    transition: all 0.2s;
+}
+
+/* Botão ATIVO (Usuários neste caso) - Cinza */
+.admin-header-right .btn-usuarios.active {
+    background-color: #9e9e9e;
+    color: #fff;
+    border-color: #9e9e9e;
+}
+
+/* Botões INATIVOS (Manifestações e Sair) - Branco */
+.admin-header-right .btn-manifestacoes,
+.admin-header-right .btn-sair {
+    background-color: #fff;
+    color: #444;
+    border-color: #ccc;
+}
+.admin-header-right .btn-manifestacoes:hover,
+.admin-header-right .btn-sair:hover {
+    background-color: #f0f0f0;
+}
+
+/* --- LINHA DIVISÓRIA VERMELHA (LARGURA TOTAL) --- */
+.linha-vermelha {
+    width: 100%; 
+    height: 2px;
+    background-color: #b60000; 
+    margin-bottom: 30px; /* Espaçamento após a linha */
+}
+
+
+/* --- CONTEÚDO PRINCIPAL (CENTRALIZADO) --- */
+.admin-main-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 40px; /* Padding para alinhar com o padding do Header */
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1100px; /* Largura máxima para centralizar o conteúdo da tabela */
+    margin: 0 auto; /* Centraliza o bloco da tabela */
+}
+
+.usuarios-table-card {
+    background-color: #fff;
+    border-radius: 4px; 
+    padding: 25px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Título e Subtítulo */
+.usuarios-header-content-inner {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee; 
+}
+
+.usuarios-header-content-inner h3 {
+    font-size: 22px;
+    font-weight: 500; 
+    color: #2b2b2b;
+    margin: 0;
+}
+
+.usuarios-header-content-inner p {
+    font-size: 13px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Filtros */
+.usuarios-filter-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.filter-label {
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+}
+
+.usuarios-filter-buttons .btn-filter {
+    padding: 5px 12px; 
+    border-radius: 0; 
+    border: 1px solid #ccc; 
+    background-color: #fff;
+    color: #444;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.usuarios-filter-buttons .active-filter {
+    background-color: #c20000; 
+    color: #fff;
+    border-color: #c20000;
+}
+
+/* Tabela */
+.table-wrapper {
+    overflow-x: auto; 
+}
+
+.table-users {
+    width: 100%; 
+    border-collapse: collapse;
+}
+
+.table-users thead th {
+    text-align: left;
+    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #444;
+    background: #f8f8f8; 
+    border-bottom: 1px solid #ddd;
+}
+
+.table-users tbody td {
+    padding: 10px 18px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+/* Ações na Tabela */
+.table-actions {
+    white-space: nowrap;
+}
+
+.table-actions .btn-gerenciar {
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.table-actions .btn-excluir {
+    background-color: #c20000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* --- FOOTER (Ajustado para 100% de largura) --- */
+.footer-wrapper {
+    width: 100%;
+    margin-top: auto; /* Empurra o footer para baixo */
+}
+
+/* Certifique-se que o componente Footer em si tenha a cor de fundo cinza, como em image_c7c6ed.png */

@@ -1,0 +1,381 @@
+.funcionario-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.funcionario-content {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.funcionario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.funcionario-header h2 {
+  color: #e30613;
+  margin-bottom: 5px;
+}
+
+.funcionario-header p {
+  color: #666;
+  margin-bottom: 0;
+}
+
+.btn-logout {
+  background-color: #e30613;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.btn-logout:hover {
+  background-color: #c30000;
+}
+
+/* Filtros */
+.filtros {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.filtros h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.botoes-filtro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.botoes-filtro button {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.botoes-filtro button:hover {
+  background-color: #f0f0f0;
+}
+
+.botoes-filtro button.ativo {
+  background-color: #e30613;
+  color: white;
+  border-color: #e30613;
+}
+
+/* Lista de manifestações */
+.lista-manifestacoes {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.lista-manifestacoes h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.sem-registros {
+  text-align: center;
+  padding: 30px;
+  color: #e30613;
+  font-style: italic;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+}
+
+/* Tabela de manifestações */
+.tabela-manifestacoes {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-manifestacoes th,
+.tabela-manifestacoes td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.tabela-manifestacoes th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+}
+
+.tabela-manifestacoes tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Status */
+.status-pendente {
+  background-color: #ffeeba;
+  color: #856404;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.status-em_analise {
+  background-color: #b8daff;
+  color: #004085;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.status-resolvido {
+  background-color: #c3e6cb;
+  color: #155724;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.status-arquivado {
+  background-color: #d6d8db;
+  color: #383d41;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+/* Botões de ação */
+.btn-visualizar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.btn-visualizar:hover {
+  background-color: #0069d9;
+}
+
+.btn-responder {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+
+.btn-responder:hover {
+  background-color: #218838;
+}
+
+.btn-resolver {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+
+.btn-resolver:hover {
+  background-color: #138496;
+}
+
+.btn-voltar {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.btn-voltar:hover {
+  background-color: #5a6268;
+}
+
+.btn-salvar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+
+.btn-salvar:hover {
+  background-color: #218838;
+}
+
+.btn-cancelar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.btn-cancelar:hover {
+  background-color: #c82333;
+}
+
+/* Detalhes da manifestação */
+.detalhes-manifestacao {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.detalhes-manifestacao h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.campo-visualizacao {
+  margin-bottom: 15px;
+}
+
+.campo-visualizacao label {
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.campo-visualizacao span {
+  color: #333;
+}
+
+.descricao-texto,
+.resposta-texto {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  margin-top: 5px;
+}
+
+.info-resposta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.campo-resposta {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.campo-resposta label {
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.campo-resposta textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.acoes-resposta {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.acoes-visualizacao {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .botoes-filtro {
+    flex-direction: column;
+  }
+  
+  .botoes-filtro button {
+    width: 100%;
+  }
+  
+  .tabela-manifestacoes th,
+  .tabela-manifestacoes td {
+    padding: 8px 10px;
+  }
+  
+  .tabela-manifestacoes th:nth-child(2),
+  .tabela-manifestacoes td:nth-child(2) {
+    display: none;
+  }
+  
+  .acoes-visualizacao,
+  .acoes-resposta {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .acoes-visualizacao button,
+  .acoes-resposta button {
+    width: 100%;
+    margin-right: 0;
+  }
+}

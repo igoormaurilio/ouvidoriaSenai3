@@ -1,0 +1,299 @@
+.admin-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.linha-vermelha {
+    width: 100%;
+    height: 2px;
+    background-color: #b60000;
+}
+
+.admin-header-full {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-header-left img {
+    height: 35px;
+}
+
+.admin-header-left h1 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    color: #333;
+}
+
+.admin-header-left span {
+    font-size: 12px;
+    color: #888;
+    display: block;
+}
+
+.admin-header-right {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-header-right button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    background: #fff;
+    transition: all 0.2s;
+}
+
+.admin-header-right .btn-manifestacoes.active {
+    background-color: #9e9e9e;
+    color: #fff;
+    border-color: #9e9e9e;
+}
+
+.admin-header-right .btn-usuarios,
+.admin-header-right .btn-sair {
+    background-color: #fff;
+    color: #444;
+    border-color: #ccc;
+}
+.admin-header-right .btn-usuarios:hover,
+.admin-header-right .btn-sair:hover {
+    background-color: #f0f0f0;
+}
+
+.admin-main-content-wrapper {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    box-sizing: border-box;
+    width: 90%; 
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.summary-cards {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.summary-cards .card {
+    background: #f9f9f9; 
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 23%;
+    text-align: left;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0; 
+}
+
+.summary-cards .card p {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #666;
+    font-weight: 600;
+}
+
+.summary-cards .card h3 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #b60000;
+    margin-top: 0;
+}
+
+.manifestacoes-title {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.manifestacoes-title h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+.manifestacoes-title small {
+    font-size: 14px;
+    color: #888;
+}
+
+.filter-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.filter-buttons button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.filter-buttons .active {
+    background: #b60000;
+    color: #fff;
+    border-color: #b60000;
+}
+
+.filter-buttons button:hover:not(.active) {
+    background-color: #e6e6e6;
+}
+
+.admin-table-container {
+    background: #f9f9f9; 
+    width: 100%;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+    
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.manifestacoes-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; 
+}
+
+.manifestacoes-table th,
+.manifestacoes-table td {
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    color: #444;
+    border-bottom: 1px solid #eee; 
+}
+
+.manifestacoes-table th {
+    background: #f0f0f0; 
+    font-weight: 600;
+}
+
+.manifestacoes-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.status-label.pendente {
+    background: #ffcc00;
+    color: #5c4100;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-label.resolvida {
+    background: #a8d5b1;
+    color: #1e5a2b;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.acoes-coluna {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.btn-gerenciar,
+.btn-excluir {
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-gerenciar {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    color: #444;
+}
+
+.btn-gerenciar:hover {
+    background-color: #e6e6e6;
+}
+
+.btn-excluir {
+    background: #b60000;
+    color: #fff;
+}
+
+.btn-excluir:hover {
+    background-color: #9c0000;
+}
+
+.empty-table-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+    flex-grow: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.footer-container {
+    background-color: #e9e9e9; 
+    color: #333; 
+    padding: 30px 0; 
+    width: 100%; 
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-top: auto;
+    font-size: 14px;
+    border-top: 5px solid #b60000; 
+}
+
+.footer-container > div {
+    width: 90%;
+    max-width: 1400px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    padding: 0 40px; 
+    box-sizing: border-box;
+}
+
+.footer-container p {
+    margin: 5px 0;
+    font-size: 14px;
+}

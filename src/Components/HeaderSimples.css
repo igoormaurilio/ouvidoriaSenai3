@@ -1,0 +1,19 @@
+.header-simples-container {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  
+}
+
+.logo-simples {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.linha-simples {
+  flex-grow: 1;
+  height: 2px;
+  background-color: #e60000;
+  opacity: 0.3;
+   margin-top: 50px; 
+}

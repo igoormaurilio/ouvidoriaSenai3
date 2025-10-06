@@ -1,0 +1,110 @@
+.reclamacao-container {
+  background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+   font-family: Arial, sans-serif;
+}
+
+.seta-voltar {
+  width: 25px;
+  height: 25px;
+  margin: 20px 0 0 20px;
+  cursor: pointer;
+}
+
+.reclamacao-content {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.titulo-pagina {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.instrucoes-preenchimento {
+  background-color: #d30000;
+  color: white;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+.form-box {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.formulario-reclamacao {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formulario-reclamacao label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+.formulario-reclamacao input,
+.formulario-reclamacao textarea {
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formulario-reclamacao textarea {
+  height: 160px;
+  padding-right: 35px;
+   font-family: Arial, sans-serif;
+}
+
+.formulario-reclamacao small {
+  font-size: 11px;
+  color: #555;
+}
+
+.btn-confirmar {
+  margin-top: 15px;
+  background-color: #d30000;
+  color: white;
+  padding: 8px;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 120px;
+  align-self: center;
+}
+
+.btn-confirmar:hover {
+  background-color: #b00000;
+}
+
+.textarea-container {
+  position: relative;
+}
+
+.icone-anexar {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}

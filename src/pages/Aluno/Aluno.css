@@ -1,0 +1,296 @@
+/* Container Geral e Linha Vermelha */
+.aluno-container {
+    font-family: Arial, sans-serif; 
+    background-color: #f7f7f7; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.linha-vermelha {
+    width: 100%;
+    height: 3px; 
+    background-color: #b60000; /* Vermelho SENAI */
+}
+
+/* --- Cabeçalho (Área Branca Superior) --- */
+.aluno-header-full {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px; 
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.aluno-header-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.senai-logo-img {
+    height: 32px; 
+    width: auto; 
+    object-fit: contain; 
+} 
+
+.aluno-header-left h1 {
+    font-size: 16px; 
+    font-weight: 500;
+    margin: 0;
+    color: #333;
+}
+.aluno-header-left span {
+    font-size: 13px;
+    color: #555;
+    display: block;
+}
+
+.aluno-header-right .btn-sair {
+    background-color: #e30613;
+    color: #ffffff;
+    border: 1px solid #b60000;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+.aluno-header-right .btn-sair:hover {
+    background-color: #f5f5f5;
+}
+
+
+/* --- Conteúdo Principal e Centralização --- */
+.aluno-main-content-wrapper {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    width: 100%; 
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* --- Cards de Resumo (Total, Análise, Finalizadas) --- */
+.aluno-summary-cards {
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.aluno-summary-cards .aluno-card {
+    background: #fff; 
+    padding: 15px 20px;
+    border-radius: 4px;
+    flex: 1 1 30%; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+    height: 90px;
+    border: 1px solid #ddd;
+}
+
+.aluno-summary-cards .aluno-card p {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #666;
+    font-weight: 500;
+}
+
+.aluno-summary-cards .aluno-card h3 {
+    font-size: 34px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 5px;
+}
+
+/* --- Minhas Manifestações (Seção de Lista) --- */
+.minhas-manifestacoes-section {
+    width: 100%;
+}
+
+.minhas-manifestacoes-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 5px;
+    color: #333;
+}
+.minhas-manifestacoes-section small {
+    font-size: 13px;
+    color: #888;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* --- Card de Manifestação (Lista de Itens) --- */
+.manifestacoes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.manifestacao-card-aluno {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    /* Adiciona a posição relativa para posicionar o status */
+    position: relative; 
+}
+
+/* ---------------------------------------------------- */
+/* AJUSTE PRINCIPAL: Topo do Card (Tipo, Data, Status) */
+/* ---------------------------------------------------- */
+.manifestacao-card-info {
+    /* Não é mais necessário o flex principal, vamos usar posicionamento */
+    display: block; 
+    margin-bottom: 10px;
+}
+
+.tipo-e-data {
+    display: flex;
+    /* Alinha o tipo e a data no topo */
+    justify-content: flex-start; 
+    align-items: baseline;
+    gap: 8px; /* Reduzido o espaço entre Tipo e Data */
+    margin-bottom: 15px; /* Espaçamento abaixo do cabeçalho de tipo/data */
+}
+
+.manifestacao-tipo {
+    font-size: 14px; 
+    font-weight: 600; /* Mais encorpado que o texto de data */
+    color: #b60000; /* Vermelho do tipo na imagem */
+    /* Garante que o tipo comece a linha */
+    padding-right: 5px; 
+    border-right: 1px solid #ccc; /* Separador sutil */
+}
+
+.manifestacao-data {
+    font-size: 13px; /* Data ligeiramente menor que o tipo */
+    color: #555;
+    font-weight: 400;
+}
+
+/* Status: Posição superior direita absoluta */
+.manifestacao-status {
+    position: absolute;
+    top: 15px; /* Ajuste para descer um pouco do topo */
+    right: 20px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+.manifestacao-status.em-análise {
+    background-color: #ffc107; /* Amarelo */
+    color: #333;
+}
+.manifestacao-status.finalizadas {
+    background-color: #e9ecef; /* Cinza */
+    color: #333;
+}
+/* ---------------------------------------------------- */
+
+.manifestacao-problema {
+    font-size: 14px;
+    color: #444;
+    margin: 5px 0 15px;
+    font-weight: 500;
+}
+
+/* Miniatura de anexo na lista */
+.manifestacao-thumb {
+    margin: 8px 0 10px;
+}
+.manifestacao-thumb img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Resposta da Ouvidoria (Fundo Verde Claro da imagem) */
+.manifestacao-resposta {
+    background-color: #e6ffe6;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #c8e6c9;
+}
+
+.manifestacao-resposta strong {
+    font-size: 14px;
+    color: #38703a;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.manifestacao-resposta p {
+    font-size: 14px;
+    color: #38703a;
+    margin: 0;
+}
+
+.btn-ver-detalhes {
+    background-color: transparent;
+    border: none;
+    color: #b60000;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+}
+
+/* --- Detalhes da Manifestação (Modo de visualização) --- */
+.detalhes-manifestacao {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+.detalhes-manifestacao h3 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #b60000;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.detalhes-manifestacao p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.detalhes-manifestacao .btn-voltar {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .aluno-header-full {
+        padding: 15px 15px;
+    }
+    .aluno-summary-cards {
+        flex-direction: column;
+    }
+}

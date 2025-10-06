@@ -1,0 +1,189 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background-color: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  padding: 3px 25px 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.logo-senai-modal {
+  width: 150px;
+  margin: 10px auto 5px;
+  display: block;
+}
+
+.linha-vermelha {
+  width: 60%;
+  height: 2px;
+  background-color: #e30613;
+  margin: 10px auto 15px;
+}
+
+.titulo-principal {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.subtitulo {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: 10px;
+}
+
+.input-icon-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+.input-icon-container img {
+  width: 18px;
+  margin-right: 10px;
+  opacity: 0.6;
+}
+
+.input-icon-container input {
+  border: none;
+  outline: none;
+  background: none;
+  flex: 1;
+  font-size: 14px;
+}
+
+.user-type {
+  margin-bottom: 20px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  color: #000;
+}
+
+.user-type label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #e30613;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  padding: 10px 0;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #c50510;
+}
+
+.actions-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 13px;
+  padding: 0 5px;
+}
+
+.actions-links button {
+  border: none;
+  background: none;
+  color: #e30613;
+  cursor: pointer;
+  padding: 0;
+  font-size: 13px;
+}
+
+.select-wrapper {
+  position: relative;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+}
+
+.select-area {
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+  font-family: inherit;
+  color: #333;
+  outline: none;
+  padding-right: 30px;
+  cursor: pointer;
+}
+
+/* Ícone de seta */
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #555;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+/* Gira para cima ao abrir */
+.select-wrapper.open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Placeholder */
+.select-area:invalid {
+  color: #aaa;
+}

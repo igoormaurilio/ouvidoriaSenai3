@@ -1,0 +1,40 @@
+.botao-ouvidoria {
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #e30613;
+  border-radius: 15px;
+  width: 120px;
+  height: 120px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 100px;
+}
+
+.botao-ouvidoria:hover {
+  transform: scale(1.05);
+}
+
+.icone-ouvidoria {
+  width: 56px;
+  height: 56px;
+  filter: brightness(100%);
+}
+
+.botao-ouvidoria p {
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+
+.botoes-ouvidoria {
+  display: flex;
+  justify-content: center;
+  gap: 160px;
+  padding: 30px 0;
+  margin-top: 40px;
+}
