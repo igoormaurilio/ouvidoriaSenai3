@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../../Components/Footer';
 import SenaiLogo from '../../assets/imagens/logosenai.png';
 import ModalGerenciar from '../../Components/ModalGerenciar';
+import SetaVoltar from '../../Components/SetaVoltar';
 import './Admin.css';
 
 const { createElement: e } = React;
@@ -182,6 +183,10 @@ function Admin() {
         { className: 'admin-container' },
         [
             renderCustomHeader(),
+
+            e('div', { key: 'seta-voltar-container', className: 'seta-voltar-container' }, 
+                e(SetaVoltar, { key: 'seta-voltar' })
+            ),
 
             e('div', { key: 'linha-vermelha', className: 'linha-vermelha' }),
 

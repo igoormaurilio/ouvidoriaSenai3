@@ -159,3 +159,26 @@
     background-color: #d4edda;
     color: #155724;
 }
+
+/* Estilos para imagens das manifestações */
+.manifestacao-anexo-wrapper {
+    margin: 20px 0;
+}
+
+.manifestacao-anexo-wrapper h3 {
+    color: #e60000;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.manifestacao-imagem {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    display: block;
+    margin: 10px 0;
+    object-fit: contain;
+    background-color: #f9f9f9;
+}

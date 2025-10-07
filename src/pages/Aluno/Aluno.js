@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import CrudService from "../../services/CrudService";
+import SetaVoltar from "../../Components/SetaVoltar";
 import "./Aluno.css"; 
 
 import SenaiLogo from '../../assets/imagens/logosenai.png'; 
@@ -238,13 +239,24 @@ function Aluno() {
                     React.createElement("p", null, `Tipo: ${traduzirTipo(itemVisualizando.tipo)}`),
                     React.createElement("p", null, `Status: ${getAlunoStatus(itemVisualizando.status)}`),
                     React.createElement("p", null, `Descrição: ${itemVisualizando.descricao}`),
-                    itemVisualizando.anexoBase64 && React.createElement(
+                    (itemVisualizando.anexoBase64 || itemVisualizando.imagemBase64 || itemVisualizando.imagem) && React.createElement(
                         'div',
                         { className: 'anexo-imagem-wrapper' },
                         React.createElement('img', {
-                            src: itemVisualizando.anexoBase64,
+                            src: itemVisualizando.anexoBase64 || itemVisualizando.imagemBase64 || itemVisualizando.imagem,
                             alt: 'Anexo da manifestação',
-                            style: { marginTop: '10px', maxWidth: '100%', maxHeight: '320px', borderRadius: '6px' }
+                            style: { 
+                                marginTop: '10px', 
+                                maxWidth: '100%', 
+                                maxHeight: '320px', 
+                                borderRadius: '6px',
+                                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                                border: '1px solid #ddd'
+                            },
+                            onError: (e) => {
+                                console.error('Erro ao carregar imagem na página do Aluno:', e.target.src);
+                                e.target.style.display = 'none';
+                            }
                         })
                     ),
                     itemVisualizando.respostaAdmin && React.createElement("p", null, `Resposta: ${itemVisualizando.respostaAdmin}`),
@@ -264,6 +276,9 @@ function Aluno() {
         "div",
         { className: "aluno-container" },
         React.createElement(AlunoHeader, { navigate: navigate, usuarioEmail: usuarioLogado.email }), 
+        React.createElement('div', { className: 'seta-voltar-container' }, 
+            React.createElement(SetaVoltar)
+        ),
         React.createElement('div', { className: 'linha-vermelha' }),
 
         React.createElement(

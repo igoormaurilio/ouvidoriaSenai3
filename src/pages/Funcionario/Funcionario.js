@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import HeaderSimples from "../../Components/HeaderSimples";
 import Footer from "../../Components/Footer";
 import CrudService from "../../services/CrudService";
+import SetaVoltar from "../../Components/SetaVoltar";
 import "./Funcionario.css";
 
 function Funcionario() {
@@ -79,6 +80,9 @@ function Funcionario() {
     "div",
     { className: "aluno-container" },
     React.createElement(HeaderSimples),
+    React.createElement('div', { className: 'seta-voltar-container' }, 
+        React.createElement(SetaVoltar)
+    ),
     React.createElement(
       "div",
       { className: "aluno-content" },

@@ -69,7 +69,16 @@ function ModalGerenciar({ onClose, manifestacao, onSaveResponse, readOnly = fals
         return e('span', { className: `status-label ${statusClass}` }, status || 'Pendente');
     };
 
-    const imagemSrc = manifestacao.anexoBase64 || manifestacao.imagemBase64 || manifestacao.imagem || manifestacao.anexo;
+    // Verifica múltiplas possibilidades de onde a imagem pode estar armazenada
+    const imagemSrc = manifestacao.anexoBase64 || 
+                     manifestacao.imagemBase64 || 
+                     manifestacao.imagem || 
+                     manifestacao.anexo ||
+                     (manifestacao.anexo && typeof manifestacao.anexo === 'string' ? manifestacao.anexo : null);
+    
+    // Debug: Log da manifestação para verificar os dados
+    console.log('Manifestação recebida:', manifestacao);
+    console.log('imagemSrc encontrada:', imagemSrc);
     
     const modalTitle = canEdit 
         ? `Gerenciar Manifestação: ${manifestacao.tipo || 'N/A'}` 
@@ -176,13 +185,34 @@ function ModalGerenciar({ onClose, manifestacao, onSaveResponse, readOnly = fals
                         e('h3', { key: 'h3-anexo' }, 'Anexo (Foto)'),
                         
                         imagemSrc 
-                            ? e('img', { 
-                                  key: 'img-anexo', 
-                                  src: imagemSrc, 
-                                  alt: 'Imagem da manifestação',
-                                  className: 'manifestacao-imagem' 
-                              })
+                            ? e('div', { key: 'img-container' }, [
+                                e('img', { 
+                                    key: 'img-anexo', 
+                                    src: imagemSrc, 
+                                    alt: 'Imagem da manifestação',
+                                    className: 'manifestacao-imagem',
+                                    onError: (e) => {
+                                        console.error('Erro ao carregar imagem:', imagemSrc);
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.style.display = 'block';
+                                    }
+                                }),
+                                e('p', { 
+                                    key: 'img-error', 
+                                    style: { display: 'none', color: 'red' } 
+                                }, 'Erro ao carregar a imagem. Verifique se o arquivo está correto.')
+                            ])
                             : e('p', { key: 'p-anexo' }, 'Nenhuma imagem anexada.'),
+                        
+                        // Debug info (remover em produção)
+                        process.env.NODE_ENV === 'development' && e('div', { 
+                            key: 'debug-info', 
+                            style: { fontSize: '12px', color: '#666', marginTop: '10px' } 
+                        }, [
+                            e('p', null, `Debug - imagemSrc: ${imagemSrc ? 'Presente' : 'Ausente'}`),
+                            e('p', null, `Debug - anexoBase64: ${manifestacao.anexoBase64 ? 'Presente' : 'Ausente'}`),
+                            e('p', null, `Debug - anexo: ${manifestacao.anexo ? 'Presente' : 'Ausente'}`)
+                        ]),
                         
                         e('hr', { key: 'hr-after-anexo' }),
                     ]),

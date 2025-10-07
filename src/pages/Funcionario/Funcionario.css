@@ -4,6 +4,21 @@
   min-height: 100vh;
 }
 
+.seta-voltar-container {
+    padding: 15px 20px 0 20px;
+}
+
+.seta-voltar {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.seta-voltar:hover {
+    opacity: 0.7;
+}
+
 .funcionario-content {
   flex: 1;
   max-width: 1200px;
