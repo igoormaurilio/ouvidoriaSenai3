@@ -60,7 +60,7 @@
   width: 90%;
   max-width: 1100px;
   gap: 40px;
-  margin-top: 40px;
+  margin: 40px auto 0;
   flex-wrap: wrap; 
 }
 
@@ -71,17 +71,19 @@
 }
 
 .descricao {
-  flex: 2;
+  flex: 1 1 40%;
   font-size: 16px;
   color: #333;
   line-height: 1.6;
   text-align: justify;
   border-radius: 9px;
   padding: 10px;
-  max-width: 35%; 
-  margin-left: 50%;
-  margin-top: -200px;
-  order: 2; 
+}
+
+/* Ajusta a coluna dos dropdowns ao lado da descrição */
+.conteudo-ouvidoria .drop-area {
+  flex: 1 1 55%;
+  min-width: 300px;
 }
 
 .botao-horario {
