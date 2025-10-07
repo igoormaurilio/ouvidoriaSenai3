@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import CrudService from "../../services/CrudService";
 import SetaVoltar from "../../Components/SetaVoltar";
+import { formatarData, formatarDataSimples } from "../../utils/dateUtils";
 import "./Aluno.css"; 
 
 import SenaiLogo from '../../assets/imagens/logosenai.png'; 
@@ -86,12 +87,7 @@ function Aluno() {
         return ALUNO_STATUS_MAP[statusOriginal] || 'Em Análise';
     }
 
-    const formatarData = (dataIso) => {
-        if (!dataIso) return "";
-        const data = new Date(dataIso);
-        // Formato DD/MM/AAAA para o card (fiel à imagem)
-        return data.toLocaleDateString("pt-BR"); 
-    };
+    // Usando a função global formatarDataSimples para exibição nos cards
     
     const carregarManifestacoes = (email) => {
         const STATUS = CrudService.STATUS_MANIFESTACAO;
@@ -181,7 +177,7 @@ function Aluno() {
                             { className: 'tipo-e-data' },
                             [
                                 React.createElement('span', { className: 'manifestacao-tipo' }, traduzirTipo(item.tipo)),
-                                React.createElement('span', { className: 'manifestacao-data' }, formatarData(item.dataCriacao)),
+                                React.createElement('span', { className: 'manifestacao-data' }, formatarDataSimples(item.dataCriacao)),
                             ]
                         ),
                         React.createElement('span', { className: `manifestacao-status ${alunoStatus.replace(/\s/g, '-').toLowerCase()}` }, alunoStatus)

@@ -13,10 +13,18 @@ function ModalLogin({ isOpen, onClose, onCadastro, onEsqueciSenha }) {
   if (!isOpen) return null;
 
   const redirecionarPorEmail = (email) => {
+    // Administradores específicos
     if (email === "pino@senai.br") return navigate("/admin/adm-mec");
     if (email === "chile@senai.br") return navigate("/admin/adm-info");
     if (email === "diretor@senai.br") return navigate("/admin");
     if (email === "viera@senai.br") return navigate("/admin/adm-fac");
+    
+    // Coordenadores
+    if (email === "chile@coordenador.senai") return navigate("/admin/adm-fac");
+    if (email === "pino@coordenador.senai") return navigate("/admin/adm-fac");
+    if (email === "vieira@coordenador.senai") return navigate("/admin/adm-fac");
+    
+    // Outros usuários
     if (email.endsWith("@aluno.senai.br")) return navigate("/");
     if (email.endsWith("@senai.br")) return navigate("/funcionario");
     alert("E-mail não autorizado.");

@@ -4,13 +4,22 @@ import CrudService from '../../services/CrudService';
 import Footer from '../../Components/Footer';
 import SenaiLogo from '../../assets/imagens/logosenai.png';
 import ModalGerenciar from '../../Components/ModalGerenciar';
+import { formatarData } from '../../utils/dateUtils';
+import { 
+    canEditManifestacao, 
+    canViewManifestacao, 
+    filterManifestacoesByPermissions,
+    getCoordenadorName 
+} from '../../utils/permissions';
 import './AdmInfo.css';
 
 const ADMIN_MAPPING = {
-    'geral@senai.br': 'Geral',
-    'info@senai.br': 'Informática',
-    'mecanica@senai.br': 'Mecânica',
-    'chile@senai.br': 'Informática'
+    'geral@senai.br': 'Geral',
+    'info@senai.br': 'Informática',
+    'mecanica@senai.br': 'Mecânica',
+    'chile@coordenador.senai': 'Geral', // Usa novo sistema de permissões
+    'pino@coordenador.senai': 'Geral', // Usa novo sistema de permissões
+    'vieira@coordenador.senai': 'Faculdade' // Usa novo sistema de permissões
 };
 
 const normalizeString = (str) => {
@@ -106,16 +115,22 @@ function AdmInfo() {
         const userEmail = usuarioLogado?.email;
         const userNormalizedArea = NORMALIZED_MAPPING[userEmail];
         
-        if (!userNormalizedArea) {
-            alert('Você precisa estar logado como administrador para acessar esta página.');
-            navigate('/');
-            return;
-        }
-        
-        setCurrentAdminArea(userNormalizedArea);
-        
-        const areaName = ADMIN_MAPPING[userEmail];
-        setCurrentAdminAreaName(areaName);
+        // Verifica se o usuário é um dos administradores mapeados ou coordenadores
+        const isCoordenador = ['chile@coordenador.senai', 'pino@coordenador.senai', 'vieira@coordenador.senai'].includes(userEmail);
+        
+        if (!userNormalizedArea && !isCoordenador) {
+            alert('Você precisa estar logado como administrador para acessar esta página.');
+            navigate('/');
+            return;
+        }
+        
+        // Define o estado do admin logado
+        const adminArea = userNormalizedArea || (isCoordenador ? 'coordenador' : null);
+        setCurrentAdminArea(adminArea);
+        
+        // Define o nome de exibição do admin
+        const areaName = ADMIN_MAPPING[userEmail] || getCoordenadorName(userEmail);
+        setCurrentAdminAreaName(areaName);
             
         const todasManifestacoes = CrudService.getAll();
         
@@ -239,7 +254,7 @@ function AdmInfo() {
                     React.createElement('td', null, m.tipo),
                     React.createElement('td', null, setorExibido),
                     React.createElement('td', null, m.contato),
-                    React.createElement('td', null, m.dataCriacao),
+                            React.createElement('td', null, formatarData(m.dataCriacao)),
                     React.createElement(
                         'td',
                         null,

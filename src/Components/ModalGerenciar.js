@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { formatarData } from '../utils/dateUtils';
 import './ModalGerenciar.css'; 
 
 const { createElement: e } = React;
@@ -165,7 +166,7 @@ function ModalGerenciar({ onClose, manifestacao, onSaveResponse, readOnly = fals
                 e('div', { key: 'body', className: 'modal-body' }, [
                     e('p', { key: 'nome' }, [e('strong', null, 'Nome: '), manifestacao.nome]),
                     e('p', { key: 'contato' }, [e('strong', null, 'Contato: '), manifestacao.contato]),
-                    e('p', { key: 'dataCriacao' }, [e('strong', null, 'Data Criação: '), manifestacao.dataCriacao]),
+                    e('p', { key: 'dataCriacao' }, [e('strong', null, 'Data Criação: '), formatarData(manifestacao.dataCriacao)]),
                     
                     e('p', { key: 'setor-manifestacao' }, [
                         e('strong', null, 'Área Alvo: '), 

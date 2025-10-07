@@ -4,6 +4,7 @@ import Footer from '../../Components/Footer';
 import SenaiLogo from '../../assets/imagens/logosenai.png';
 import ModalGerenciar from '../../Components/ModalGerenciar';
 import SetaVoltar from '../../Components/SetaVoltar';
+import { formatarData } from '../../utils/dateUtils';
 import './Admin.css';
 
 const { createElement: e } = React;
@@ -276,7 +277,7 @@ function Admin() {
                                                             e('td', null, m.tipo),
                                                             e('td', null, m.nome),
                                                             e('td', null, m.contato),
-                                                            e('td', null, m.dataCriacao),
+                                                            e('td', null, formatarData(m.dataCriacao)),
                                                             e(
                                                                 'td',
                                                                 null,

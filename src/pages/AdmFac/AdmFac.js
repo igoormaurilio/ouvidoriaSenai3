@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CrudService from '../../services/CrudService'; 
-import Footer from '../../Components/Footer'; 
-import SenaiLogo from '../../assets/imagens/logosenai.png'; 
-import ModalGerenciar from '../../Components/ModalGerenciar'; 
+import CrudService from '../../services/CrudService';
+import Footer from '../../Components/Footer';
+import SenaiLogo from '../../assets/imagens/logosenai.png';
+import ModalGerenciar from '../../Components/ModalGerenciar';
+import { formatarData } from '../../utils/dateUtils';
+import { 
+    canEditManifestacao, 
+    canViewManifestacao, 
+    filterManifestacoesByPermissions,
+    getCoordenadorName 
+} from '../../utils/permissions';
 import './AdmFac.css';
 
 // --- Mapeamento de Administradores ---
 const ADMIN_MAPPING = {
-    'diretor@senai.br': 'Geral', // Pode editar tudo
-    'chile@senai.br': 'Informática', // Pode editar só Informática
-    'pino@senai.br': 'Mecânica', // Pode editar só Mecânica
-    'viera@senai.br': 'Faculdade' // Alias para o teste do usuário
+    'diretor@senai.br': 'Geral', // Pode editar tudo
+    'chile@coordenador.senai': 'Geral', // Usa novo sistema de permissões
+    'pino@coordenador.senai': 'Geral', // Usa novo sistema de permissões
+    'vieira@coordenador.senai': 'Faculdade' // Usa novo sistema de permissões
 };
 
 const normalizeString = (str) => {
@@ -26,18 +33,15 @@ const NORMALIZED_MAPPING = Object.fromEntries(
     Object.entries(ADMIN_MAPPING).map(([email, area]) => [email, normalizeString(area)])
 );
 
-// Função central para verificar a permissão de edição
-const canEditManifestacao = (manifestacao, currentAdminArea) => {
-    const adminArea = normalizeString(currentAdminArea);
-    const manifestacaoArea = normalizeString(manifestacao.setor);
-
-    // 1. Admin Geral pode editar tudo
-    if (adminArea === 'faculdade') {
-        return true;
-    }
-    
-    // 2. Admin Específico edita apenas o seu setor
-    return adminArea === manifestacaoArea;
+// Função central para verificar a permissão de edição (usando novo sistema)
+const canEditManifestacaoLocal = (manifestacao, userEmail) => {
+    // Se for diretor, pode editar tudo
+    if (userEmail === 'diretor@senai.br') {
+        return true;
+    }
+    
+    // Para coordenadores, usa o novo sistema de permissões
+    return canEditManifestacao(manifestacao, userEmail);
 };
 
 
@@ -112,24 +116,30 @@ function AdmFac() {
         const userEmail = usuarioLogado?.email;
         const userNormalizedArea = NORMALIZED_MAPPING[userEmail];
         
-        // Verifica se o usuário é um dos administradores mapeados
-        if (!userNormalizedArea) {
-            alert('Você precisa estar logado como administrador para acessar esta página.');
-            navigate('/');
-            return;
-        }
+        // Verifica se o usuário é um dos administradores mapeados ou coordenadores
+        const isCoordenador = ['chile@coordenador.senai', 'pino@coordenador.senai', 'vieira@coordenador.senai'].includes(userEmail);
+        
+        if (!userNormalizedArea && !isCoordenador) {
+            alert('Você precisa estar logado como administrador para acessar esta página.');
+            navigate('/');
+            return;
+        }
         
-        // Define o estado do admin logado
-        setCurrentAdminArea(userNormalizedArea);
-        
-        // Define o nome de exibição do admin
-        const areaName = ADMIN_MAPPING[userEmail];
-        setCurrentAdminAreaName(areaName);
-            
-        const todasManifestacoes = CrudService.getAll();
-        
-        // Garante que a lista é composta por objetos únicos para evitar o erro de referência
-        setManifestacoes(todasManifestacoes.map(m => ({ ...m })));
+        // Define o estado do admin logado
+        const adminArea = userNormalizedArea || (isCoordenador ? 'coordenador' : null);
+        setCurrentAdminArea(adminArea);
+        
+        // Define o nome de exibição do admin
+        const areaName = ADMIN_MAPPING[userEmail] || getCoordenadorName(userEmail);
+        setCurrentAdminAreaName(areaName);
+            
+        const todasManifestacoes = CrudService.getAll();
+        
+        // Filtra manifestações baseado nas permissões do usuário
+        const manifestacoesFiltradas = filterManifestacoesByPermissions(todasManifestacoes, userEmail);
+        
+        // Garante que a lista é composta por objetos únicos para evitar o erro de referência
+        setManifestacoes(manifestacoesFiltradas.map(m => ({ ...m })));
 
     }, [navigate]);
     
@@ -149,29 +159,41 @@ function AdmFac() {
         });
     };
 
-    const excluirManifestacao = (id) => {
-        const manifestacao = manifestacoes.find(m => m.id === id);
+    const excluirManifestacao = (id) => {
+        const manifestacao = manifestacoes.find(m => m.id === id);
+        const userEmail = JSON.parse(localStorage.getItem('usuarioLogado'))?.email;
 
-        if (!manifestacao || !canEditManifestacao(manifestacao, currentAdminArea)) {
-             alert(`Você só pode excluir manifestações da sua área (${currentAdminAreaName}).`);
-             return;
-        }
+        if (!manifestacao || !canEditManifestacaoLocal(manifestacao, userEmail)) {
+             alert(`Você não tem permissão para excluir esta manifestação.`);
+             return;
+        }
 
-        if (window.confirm('Tem certeza que deseja excluir essa manifestação?')) {
-            const listaSemExcluida = manifestacoes.filter(m => m.id !== id);
-            localStorage.setItem('manifestacoes', JSON.stringify(listaSemExcluida));
-            
-            setManifestacoes(listaSemExcluida);
-        }
-    };
+        if (window.confirm('Tem certeza que deseja excluir essa manifestação?')) {
+            const listaSemExcluida = manifestacoes.filter(m => m.id !== id);
+            localStorage.setItem('manifestacoes', JSON.stringify(listaSemExcluida));
+            
+            setManifestacoes(listaSemExcluida);
+        }
+    };
 
-    const gerenciarManifestacao = (id) => {
-        const manifestacao = manifestacoes.find(m => m.id === id);
-        if (manifestacao) {
-            // Clona o objeto para garantir dados únicos no modal
-            setManifestacaoSelecionada({ ...manifestacao });
-        }
-    };
+    const gerenciarManifestacao = (id) => {
+        const manifestacao = manifestacoes.find(m => m.id === id);
+        const userEmail = JSON.parse(localStorage.getItem('usuarioLogado'))?.email;
+        
+        if (manifestacao) {
+            // Verifica se pode editar ou apenas visualizar
+            const canEdit = canEditManifestacaoLocal(manifestacao, userEmail);
+            const canView = canViewManifestacao(manifestacao, userEmail);
+            
+            if (!canView) {
+                alert('Você não tem permissão para visualizar esta manifestação.');
+                return;
+            }
+            
+            // Clona o objeto para garantir dados únicos no modal
+            setManifestacaoSelecionada({ ...manifestacao, canEdit });
+        }
+    };
 
     const fecharModal = () => {
         setManifestacaoSelecionada(null);
@@ -180,10 +202,11 @@ function AdmFac() {
     const salvarRespostaModal = (id, novoStatus, resposta) => {
         const manifestacaoOriginal = manifestacoes.find(m => m.id === id);
         
-        if (!canEditManifestacao(manifestacaoOriginal, currentAdminArea)) {
-            alert(`Erro: Você não pode editar manifestações que não são da sua área (${currentAdminAreaName}).`);
-            return;
-        }
+        const userEmail = JSON.parse(localStorage.getItem('usuarioLogado'))?.email;
+        if (!canEditManifestacaoLocal(manifestacaoOriginal, userEmail)) {
+            alert(`Erro: Você não tem permissão para editar esta manifestação.`);
+            return;
+        }
 
         const manifestacaoEditada = {
             ...manifestacaoOriginal,
@@ -237,9 +260,11 @@ function AdmFac() {
             React.createElement('td', { colSpan: 6, className: 'empty-table-message' }, 'Nenhuma manifestação encontrada para o filtro selecionado.')
         )
         : manifestacoesFiltradas.map((m) => {
-            const podeEditar = canEditManifestacao(m, currentAdminArea);
-            const botaoGerenciarClasse = podeEditar ? 'btn-gerenciar' : 'btn-visualizar-only';
-            const botaoGerenciarTexto = podeEditar ? 'Gerenciar' : 'Visualizar';
+            const userEmail = JSON.parse(localStorage.getItem('usuarioLogado'))?.email;
+            const podeEditar = canEditManifestacaoLocal(m, userEmail);
+            const podeVisualizar = canViewManifestacao(m, userEmail);
+            const botaoGerenciarClasse = podeEditar ? 'btn-gerenciar' : 'btn-visualizar-only';
+            const botaoGerenciarTexto = podeEditar ? 'Gerenciar' : 'Visualizar';
             const setorExibido = m.setor || 'N/A'; 
 
             return React.createElement(
@@ -252,7 +277,7 @@ function AdmFac() {
                     React.createElement('td', null, m.tipo),
                     React.createElement('td', null, setorExibido),
                     React.createElement('td', null, m.contato),
-                    React.createElement('td', null, m.dataCriacao),
+                            React.createElement('td', null, formatarData(m.dataCriacao)),
                     React.createElement(
                         'td',
                         null,

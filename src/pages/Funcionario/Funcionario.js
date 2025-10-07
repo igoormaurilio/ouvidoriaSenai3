@@ -4,6 +4,7 @@ import HeaderSimples from "../../Components/HeaderSimples";
 import Footer from "../../Components/Footer";
 import CrudService from "../../services/CrudService";
 import SetaVoltar from "../../Components/SetaVoltar";
+import { formatarData } from "../../utils/dateUtils";
 import "./Funcionario.css";
 
 function Funcionario() {
@@ -50,11 +51,7 @@ function Funcionario() {
     setItemVisualizando(null);
   };
 
-  const formatarData = (dataIso) => {
-    if (!dataIso) return "";
-    const data = new Date(dataIso);
-    return data.toLocaleDateString("pt-BR") + " " + data.toLocaleTimeString("pt-BR");
-  };
+  // Usando a função global formatarData
 
   const traduzirTipo = (tipo) => {
     const tipos = {

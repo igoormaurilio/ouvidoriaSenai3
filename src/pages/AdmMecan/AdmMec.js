@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../../Components/Footer';
 import SenaiLogo from '../../assets/imagens/logosenai.png';
 import ModalGerenciar from '../../Components/ModalGerenciar';
+import { formatarData } from '../../utils/dateUtils';
+import { 
+    canEditManifestacao, 
+    canViewManifestacao, 
+    filterManifestacoesByPermissions,
+    getCoordenadorName 
+} from '../../utils/permissions';
 import './AdmMec.css';
 
 const { createElement: e } = React;
@@ -129,21 +136,30 @@ function AdmMec() {
         }
 
         // 1. Verificação de Login
-        if (!usuarioLogado || usuarioLogado.email !== ADMIN_EMAIL) {
+        const userEmail = usuarioLogado?.email;
+        const isCoordenador = ['chile@coordenador.senai', 'pino@coordenador.senai', 'vieira@coordenador.senai'].includes(userEmail);
+        
+        if (!usuarioLogado || (userEmail !== ADMIN_EMAIL && !isCoordenador)) {
             alert('Você precisa estar logado como administrador de mecânica para acessar esta página.');
             navigate('/');
             return;
         }
             
-        // 2. Carrega e Filtra manifestações APENAS por área: MECÂNICA
+        // 2. Carrega e Filtra manifestações baseado nas permissões
         const todasManifestacoes = CrudService.getAll();
 
-        const manifestacoesMec = todasManifestacoes.filter(m => 
-            // Filtra se o setor/área/curso é 'mecanica'
-            normalizeString(m.setor || m.area || m.curso) === AREA_ADMIN
-        );
+        let manifestacoesFiltradas;
+        if (isCoordenador) {
+            // Para coordenadores, usa o novo sistema de permissões
+            manifestacoesFiltradas = filterManifestacoesByPermissions(todasManifestacoes, userEmail);
+        } else {
+            // Para admin específico, filtra apenas por área
+            manifestacoesFiltradas = todasManifestacoes.filter(m => 
+                normalizeString(m.setor || m.area || m.curso) === AREA_ADMIN
+            );
+        }
 
-        setManifestacoes(manifestacoesMec);
+        setManifestacoes(manifestacoesFiltradas);
 
     }, [navigate]);
 
@@ -240,7 +256,7 @@ function AdmMec() {
                     e('td', null, m.tipo),
                     e('td', null, m.nome || 'Anônimo'),
                     e('td', null, m.contato || 'N/A'),
-                    e('td', null, m.dataCriacao),
+                    e('td', null, formatarData(m.dataCriacao)),
                     e(
                         'td',
                         null,
